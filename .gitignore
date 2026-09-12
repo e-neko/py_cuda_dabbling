@@ -1,0 +1,6 @@
+# Ignore everything inside the huggingface cache dir
+.cache/huggingface/*
+
+# …but keep a placeholder so the directory itself is tracked
+!.cache/huggingface/.gitkeep
+

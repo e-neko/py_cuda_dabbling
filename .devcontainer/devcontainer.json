@@ -1,0 +1,33 @@
+{
+  "name": "Fedora AI Podman Dev Container",
+  "image": "localhost/ai-dev-stack:latest",
+  "runArgs": [
+    "--device=nvidia.com/gpu=all",
+    "--security-opt=label=disable",
+    "--network=ainternal",
+    "-p=8880:8880",
+    "-p=8881:8881",
+    "--userns=keep-id"
+  ],
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind,Z",
+    "source=${localEnv:HOME}/.local/share/comfyui/models,target=/models/comfyui,type=bind,Z",
+    "source=${localEnv:HOME}/.local/share/ollama/models,target=/models/ollama,type=bind,Z",
+    
+    "source=${localWorkspaceFolder}/.cache/huggingface,target=/workspace/.cache/huggingface,type=bind,Z"
+  ],
+  "containerEnv": {
+    "HF_HOME": "/workspace/.cache/huggingface",
+    "OLLAMA_MODELS": "/models/ollama"
+  },
+  "settings": {
+    "python.defaultInterpreterPath": "/usr/bin/python3"
+  },
+  "extensions": [
+    "ms-python.python",
+    "ms-python.vscode-pylance"
+  ],
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopContainer"
+}
+
